@@ -1,0 +1,9 @@
+node_modules
+dist
+bash
+coverage
+.vscode
+bash.exe.stackdump
+tmp
+.env
+jest-output.json
