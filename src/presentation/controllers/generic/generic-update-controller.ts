@@ -17,17 +17,25 @@ export class GenericUpdateController<BaseT, UpdateT> implements Controller {
     private readonly validation?: Validation
   ) {}
 
+  async transformData(data: BaseT): Promise<any> {
+    return Promise.resolve(data)
+  }
+
+  getModel(httpRequest?: HttpRequest) {
+    return httpRequest.body
+  }
+
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const id = httpRequest.params.id
-      const model = httpRequest.body
+      const id = Number(httpRequest.params.id)
+      const model = this.getModel(httpRequest)
       const error = this.validation?.validate(model)
       if (error) {
         return badRequest(error)
-      } else {
-        const updatedModel = await this.updateInterface.update(id, model)
-        return success(updatedModel)
       }
+      const updatedModel = await this.updateInterface.update(id, model)
+      const values = await this.transformData(updatedModel);
+      return success(values)
     } catch (err) {
       return serverError(err)
     }
