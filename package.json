@@ -4,6 +4,7 @@
   "description": "typescript backend test for mLabs",
   "main": "dist/main/server.js",
   "scripts": {
+    "postinstall": "husky install",
     "start": "node dist/main/server.js",
     "build": "npm run pre-build && rimraf dist && tsc -p tsconfig-build.json && npm run copy-schema",
     "pre-build": "ts-json-schema-generator -p \"./src/domain/models/**/*.ts\" --out \"./src/utils/validators/schema.json\"",
