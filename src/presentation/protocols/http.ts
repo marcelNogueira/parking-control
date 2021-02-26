@@ -11,4 +11,5 @@ export interface HttpRequest<T = any> {
   params?: any
   query?: QueryFilters
   files?: any
+  createdAt?: any
 }
