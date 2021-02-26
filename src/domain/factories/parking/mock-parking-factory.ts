@@ -1,5 +1,5 @@
 import { ParkingModel } from '@/domain/models/parking'
-import { AddParkingModel, AddParkingResponseModel } from '@/domain/usecases/parking'
+import { AddParkingModel, AddParkingResponseModel, OutParkingModel } from '@/domain/usecases/parking'
 import { MockFactoryInterface } from '@/domain/factories/generic/mock-factory-interface'
 import { UpdateParkingModel } from '@/domain/usecases/parking/update-parking'
 import { PayParkingModel } from '@/domain/usecases/parking/pay-parking'
@@ -25,6 +25,10 @@ export class MockParkingFactory
 
   makeMockPayModel(): PayParkingModel {
     return { paid: true }
+  }
+
+  makeMockOutModel(): OutParkingModel {
+    return { left: true }
   }
 
   makeMockModelArray(): ParkingModel[] {
