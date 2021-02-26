@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { adaptRoute } from '@/main/adapters/express-route-adapter'
-import { makeAddParkingController } from '@/main/factories/parking'
+import { makeAddParkingController, makePayParkingController } from '@/main/factories/parking'
 // import { makeAdminNewPasswordEmailController } from '../factories/user/password/admin-new-password-email-factory'
 // import { makeGetAllUsersController } from '../factories/user/get/get-all-users-controller-factory'
 // import { makeGetUserController } from '../factories/user/get/get-user-controller-factory'
@@ -13,12 +13,6 @@ import { makeAddParkingController } from '@/main/factories/parking'
 // import { auth, adminAuth } from '../middlewares/auth'
 
 export default (router: Router): void => {
-  router.post('/parking', adaptRoute(makeAddParkingController()))
-  // router.post('/login', adaptRoute(makeLoginController()))
-  // router.get('/user', auth, adaptRoute(makeGetUserController()))
-  // router.get('/users', auth, adaptRoute(makeGetAllUsersController()))
-  // router.put('/change-password', auth, adaptRoute(updatePasswordController()))
-  // router.get('/company/users', auth, adaptRoute(makeGetUsersByCompanyIdFactory()))
-  // router.post('/reset-password-email', adaptRoute(sendRecoveryEmailController()))
-  // router.post('/reset-password', adaptRoute(resetPasswordController()))
+  router.post('/parking', adaptRoute(makeAddParkingController()));
+  router.patch('/parking/:id/pay', adaptRoute(makePayParkingController()));
 }
