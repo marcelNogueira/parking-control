@@ -50,7 +50,6 @@ export class GenericGetAllController<BaseT> implements Controller {
         },
       )
       const values = await this.transformData(getAllModel, Object.keys(transformParams))
-      // Se a resposta é [] porque algum foi eliminado no processo de permissões, retorna forbidden
       return !values.length
         ? success(values)
         : forbidden(new Error('You do not have permission to access this'))

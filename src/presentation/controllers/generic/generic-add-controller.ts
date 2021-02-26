@@ -17,6 +17,10 @@ export class GenericAddController<BaseT, AddT> implements Controller {
     protected readonly validation: Validation
   ) {}
 
+  async transformData(data: BaseT): Promise<any> {
+    return Promise.resolve(data)
+  }
+
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const model = httpRequest.body
@@ -24,7 +28,9 @@ export class GenericAddController<BaseT, AddT> implements Controller {
       if (error) {
         return badRequest(error)
       }
-      return success(await this.addInterface.add(model))
+      const addedModel = await this.addInterface.add(model);
+      const values = await this.transformData(addedModel);
+      return success(values)
     } catch (err) {
       console.error(err)
       return serverError(err)
