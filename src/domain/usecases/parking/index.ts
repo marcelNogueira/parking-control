@@ -1,4 +1,5 @@
 export * from './add-parking';
-export * from './pay-parking copy';
+export * from './get-parking';
+export * from './out-parking';
 export * from './pay-parking';
 export * from './update-parking';
