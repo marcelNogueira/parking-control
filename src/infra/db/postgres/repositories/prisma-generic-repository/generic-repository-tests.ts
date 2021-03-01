@@ -75,7 +75,9 @@ export class GenericRepositoryTests<BaseT extends BaseModel, AddT, UpdateT> {
     Object.keys(objToUpdate)
       .forEach((key) => {
         expect(updatedObj[key]).toEqual(objToUpdate[key])
-      })
+    })
+
+    await sut.repository.delete(id)
   }
 
   genericDeleteTest = async (sut: GenericRepositorySutModel<BaseT, AddT, UpdateT>): Promise<void> => {
@@ -89,6 +91,8 @@ export class GenericRepositoryTests<BaseT extends BaseModel, AddT, UpdateT> {
     const obj = await sut.repository.add(sut.mockFactory.makeMockAddModel())
     const objFromDb = await sut.repository.get(obj.id)
     expect(obj).toEqual(objFromDb)
+
+    await sut.repository.delete(obj.id)
   }
 
   genericGetAllTest = async (sut: GenericRepositorySutModel<BaseT, AddT, UpdateT>): Promise<void> => {
@@ -98,5 +102,8 @@ export class GenericRepositoryTests<BaseT extends BaseModel, AddT, UpdateT> {
     const objsFromDb = await sut.repository.getAll()
     expect(objsFromDb).toContainEqual(addedObj1)
     expect(objsFromDb).toContainEqual(addedObj2)
+
+    await sut.repository.delete(addedObj1.id)
+    await sut.repository.delete(addedObj2.id)
   }
 }
