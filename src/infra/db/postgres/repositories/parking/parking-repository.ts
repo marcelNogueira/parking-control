@@ -1,5 +1,8 @@
 import { 
-  AddParkingRepository
+  AddParkingRepository,
+  GetAllParkingRepository,
+  GetParkingRepository,
+  UpdateParkingRepository
 } from '@/data/protocols/db/parking'
 import { ParkingModel } from '@/domain/models/parking'
 import {
@@ -14,6 +17,9 @@ export class ParkingPostgresRepository
     AddParkingModel
   >
   implements
-    AddParkingRepository {
+    AddParkingRepository,
+    GetAllParkingRepository,
+    GetParkingRepository,
+    UpdateParkingRepository {
   tableName = 'parking'
 }
