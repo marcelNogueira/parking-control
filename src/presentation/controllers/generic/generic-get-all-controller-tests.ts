@@ -34,15 +34,9 @@ export class GenericGetAllControllerTestSuite<BaseT> {
             stringParam: '1',
           },
           query: {
-            // Paginator
-            limit: 10,
-            after_id: 20,
-            sort_by: `["asc(email)", "asc(id)", "desc(test)"]`,
-            // Other
             stringQueryParam: 'string-param',
             numberQueryParam: 2,
             arrayQueryParam: [1, 2, 3],
-            // number
           },
         })
         expect(getSpy).toHaveBeenCalledWith(
@@ -52,15 +46,6 @@ export class GenericGetAllControllerTestSuite<BaseT> {
             stringQueryParam: 'string-param',
             numberQueryParam: 2,
             arrayQueryParam: [1, 2, 3],
-          },
-          {
-            limit: 10,
-            lastId: 20,
-            sortBy: [
-              { key: 'email', asc: true },
-              { key: 'id', asc: true },
-              { key: 'test', asc: false },
-            ],
           }
         )
       })

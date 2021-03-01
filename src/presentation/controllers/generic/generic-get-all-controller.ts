@@ -11,8 +11,7 @@ export class GenericGetAllController<BaseT> implements Controller {
 
   transformParams: string[] = []
 
-  //* Caso método não seja sobrescrito, não faz nada */
-  async transformData(data: BaseT[], transformTypes?: string[]): Promise<any[]> {
+  async transformData(data: BaseT[]): Promise<any[]> {
     return Promise.resolve(data)
   }
 
@@ -20,21 +19,15 @@ export class GenericGetAllController<BaseT> implements Controller {
     return httpRequest.params
   }
 
-  getQueryParams(httpRequest: HttpRequest): [QueryFilters, QueryFilters] {
-    const transformParams: QueryFilters = {}
+  getQueryParams(httpRequest: HttpRequest): [QueryFilters] {
     const normalQueryParams: QueryFilters = {}
 
     if (httpRequest.query) {
       Object.entries(httpRequest.query).forEach(([key, value]) => {
-        // ?after_id=20&limit=10
-        if (this.transformParams && this.transformParams.includes(key)) {
-          transformParams[key] = value || true
-        } else {
-          normalQueryParams[key] = value || true
-        }
+        normalQueryParams[key] = value || true
       })
     }
-    return [normalQueryParams, transformParams]
+    return [normalQueryParams]
   }
 
   /**
@@ -42,15 +35,15 @@ export class GenericGetAllController<BaseT> implements Controller {
    */
   async handle(httpRequest: HttpRequest): Promise<HttpResponse<BaseT[]>> {
     try {
-      const [normalQueryParams, transformParams] = this.getQueryParams(httpRequest)
+      const [normalQueryParams] = this.getQueryParams(httpRequest)
       const getAllModel = await this.getAllInterface.getAll(
         {
           ...httpRequest.params,
           ...normalQueryParams,
         },
       )
-      const values = await this.transformData(getAllModel, Object.keys(transformParams))
-      return !values.length
+      const values = await this.transformData(getAllModel)
+      return values.length
         ? success(values)
         : forbidden(new Error('You do not have permission to access this'))
     } catch (err) {
