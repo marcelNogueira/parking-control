@@ -3,6 +3,7 @@ import { AddParkingModel, AddParkingResponseModel, OutParkingModel } from '@/dom
 import { MockFactoryInterface } from '@/domain/factories/generic/mock-factory-interface'
 import { UpdateParkingModel } from '@/domain/usecases/parking/update-parking'
 import { PayParkingModel } from '@/domain/usecases/parking/pay-parking'
+import { GetHistoryParkingByPlateModel } from '@/domain/usecases/parking/get-history-parking'
 const mockDate = new Date()
 
 export class MockParkingFactory
@@ -28,13 +29,20 @@ export class MockParkingFactory
   }
 
   makeMockOutModel(): OutParkingModel {
-    return { left: true }
+    return { left: true, time: '20 minutes' }
   }
 
-  makeMockModelArray(): ParkingModel[] {
+  makeMockModelArray(): GetHistoryParkingByPlateModel[] {
     return [
-      { id: 1, plate: 'AAA-9990', createdAt: mockDate, time: 'string', paid: true, left: true },
-      { id: 2, plate: 'AAA-9990', createdAt: mockDate, time: 'string', paid: true, left: true },
+      { id: 1, time: 'string', paid: false, left: false },
+      { id: 2, time: '20 minutes', paid: true, left: true },
+    ]
+  }
+
+  makeMockHistoryModelArray({time = undefined, createdAt = undefined}): GetHistoryParkingByPlateModel[] {
+    return [
+      { id: 1, time, paid: false, left: false, createdAt },
+      { id: 2, time: '20 minutes', paid: true, left: true },
     ]
   }
 
