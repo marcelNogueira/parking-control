@@ -15,7 +15,7 @@ export class OutParkingController extends GenericUpdateController<
     seconds -= hours * 60 * 60;
     const minutes = Math.floor(seconds / (60));
     seconds -= minutes * 60;
-    const time = `${hours ? `${hours} hours ` : ''}${minutes ? `${minutes} minutes ` : ''}${seconds ? `${Math.floor(seconds)} seconds` : ''}`
+    const time = `${hours ? `${hours} hours ` : ''}${minutes ? `${minutes} minutes` : ''}${!minutes && !hours ? `${Math.floor(seconds)} seconds` : ''}`
     return { left: true, time };
   }
 }

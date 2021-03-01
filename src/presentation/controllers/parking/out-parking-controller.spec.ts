@@ -11,11 +11,16 @@ const throwError = (): never => {
 }
 const mockFactory = new MockParkingFactory()
 const fakeResponse = mockFactory.makeMockModel();
-const makeFakeRequest = (): HttpRequest => ({
-  params: {
-    id: fakeResponse.id,
+const makeFakeRequest = (): HttpRequest => {
+  const createdAt = new Date();
+  createdAt.setMinutes(createdAt.getMinutes() - 20);
+  return {
+    params: {
+      id: fakeResponse.id,
+    },
+    createdAt
   }
-});
+};
 
 class OutParkingInterfaceStub implements OutParking {
   constructor(private readonly mockFactory: MockParkingFactory) {}
