@@ -2,7 +2,7 @@ import { GenericGetAllInterface } from '@/domain/usecases/generic'
 import { QueryFilters } from '@/presentation/helpers/types'
 import { Controller, HttpRequest, HttpResponse } from '@/presentation/protocols'
 import {
-  forbidden,
+  noContent,
   serverError,
   success,
 } from '@/presentation/helpers/http/http-helper'
@@ -45,7 +45,7 @@ export class GenericGetAllController<BaseT> implements Controller {
       const values = await this.transformData(getAllModel)
       return values.length
         ? success(values)
-        : forbidden(new Error('You do not have permission to access this'))
+        : noContent()
     } catch (err) {
       console.error(err)
       return serverError(err)

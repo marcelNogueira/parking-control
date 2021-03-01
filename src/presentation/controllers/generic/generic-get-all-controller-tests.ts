@@ -1,6 +1,7 @@
 import { MockFactoryInterface } from '@/domain/factories/generic/mock-factory-interface'
 import { GenericGetAllInterface } from '@/domain/usecases/generic'
 import {
+  noContent,
   serverError,
   success,
 } from '@/presentation/helpers/http/http-helper'
@@ -48,6 +49,16 @@ export class GenericGetAllControllerTestSuite<BaseT> {
             arrayQueryParam: [1, 2, 3],
           }
         )
+      })
+
+      test('Should return 204 if response was empty', async () => {
+        jest.spyOn(sut.getStub, 'getAll').mockResolvedValueOnce(null);
+        const httpResponse = await sut.controller.handle({
+          params: {
+            testParam: '1',
+          },
+        });
+        expect(httpResponse).toEqual(noContent());
       })
 
       test('Should return 200 and object with correct values on success', async () => {

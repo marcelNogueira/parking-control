@@ -6,7 +6,7 @@ export class GetHistoryParkingController extends GenericGetAllController<
   ParkingModel
 > {
   async transformData(data: ParkingModel[]): Promise<GetHistoryParkingByPlateModel[]> {
-    if (!data.length) return data;
+    if (!data || !data.length) return [];
     const response: GetHistoryParkingByPlateModel[] = data.map((parking: ParkingModel): GetHistoryParkingByPlateModel => {
       const { createdAt, plate, ...historyData } = parking;
       if (!historyData.time) {
