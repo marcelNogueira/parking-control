@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  database:
+    container_name: parking-control-db-tests
+    image: postgres:10.3
+    restart: always
+    environment:
+      - POSTGRES_USER=marcel
+      - POSTGRES_PASSWORD=marcel123
+    volumes: 
+      - database:/var/lib/postgresql/pc/test/data/
+    ports:
+      - 5433:5432
+
+volumes: 
+  database:
