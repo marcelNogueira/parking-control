@@ -27,6 +27,6 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
-    - run: npm run docker-up --if-present
+    - run: npm run db-up --if-present
     - run: npm test
-    - run: npm run docker-down
+    - run: npm run db-down
