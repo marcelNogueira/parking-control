@@ -23,7 +23,7 @@ services:
       target: base
     restart: always
     image: parking-control
-    env_file: .env
+    env_file: docker.env
     command: npm start
     volumes: 
       - ./prisma:/usr/src/parking-control/prisma
