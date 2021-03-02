@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  database:
+    container_name: parking-control-db
+    image: postgres:10.3
+    restart: always
+    environment:
+      - POSTGRES_USER=marcel
+      - POSTGRES_PASSWORD=marcel123
+    volumes: 
+      - database:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  api:
+    container_name: parking-control-api
+    build:
+      context: "."
+      target: base
+    restart: always
+    image: parking-control
+    env_file: .env
+    command: npm start
+    volumes: 
+      - ./prisma:/usr/src/parking-control/prisma
+      - ./dist:/usr/src/parking-control/dist
+      - ./package.json:/usr/src/parking-control/package.json
+    ports: 
+      - 8080:8080
+    depends_on: 
+      database:
+        condition: service_healthy
+    links: 
+      - database
+
+volumes: 
+  database:
