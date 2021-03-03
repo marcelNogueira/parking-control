@@ -32,7 +32,6 @@ export class GenericAddController<BaseT, AddT> implements Controller {
       const values = await this.transformData(addedModel);
       return success(values)
     } catch (err) {
-      console.error(err)
       return serverError(err)
     }
   }

@@ -1,8 +1,5 @@
-import { ParkingModel } from '@/domain/models/parking'
-import { GenericGetInterface } from '@/domain/usecases/generic'
 import { GetParking } from '@/domain/usecases/parking/get-parking'
 import {
-  noContent,
   forbidden,
   serverError,
   success,
@@ -13,7 +10,7 @@ import {
   HttpResponse,
   Middleware
 } from '@/presentation/protocols'
-import { getQueryParams } from '../controllers/generic/helpers'
+import { getQueryParams } from '../controllers/generic/query-params'
 import { InvalidOutError, NotFoundError } from '../errors'
 
 export class OutVerifierMiddleware implements Middleware {

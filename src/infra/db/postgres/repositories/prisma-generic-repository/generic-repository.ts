@@ -20,7 +20,7 @@ export abstract class GenericRepository<BaseT, AddT, UpdateT>
     try {
       return (await this.prisma[this.tableName][queryType](options))
     } catch (error) {
-      console.log(error)
+      throw error
     } finally {
       this.prisma.$disconnect()
     }

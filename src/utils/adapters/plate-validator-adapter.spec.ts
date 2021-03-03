@@ -1,4 +1,3 @@
-import { InvalidPlateError } from '@/presentation/errors'
 import { PlateValidatorAdapter } from './plate-validator-adapter'
 
 const makeSut = (): PlateValidatorAdapter => {

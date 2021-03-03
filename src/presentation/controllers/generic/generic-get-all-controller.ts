@@ -15,10 +15,6 @@ export class GenericGetAllController<BaseT> implements Controller {
     return Promise.resolve(data)
   }
 
-  getParams(httpRequest: HttpRequest): QueryFilters {
-    return httpRequest.params
-  }
-
   getQueryParams(httpRequest: HttpRequest): [QueryFilters] {
     const normalQueryParams: QueryFilters = {}
 
@@ -47,7 +43,6 @@ export class GenericGetAllController<BaseT> implements Controller {
         ? success(values)
         : noContent()
     } catch (err) {
-      console.error(err)
       return serverError(err)
     }
   }
