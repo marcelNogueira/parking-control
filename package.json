@@ -1,6 +1,6 @@
 {
   "name": "parking_control",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "typescript backend test for mLabs",
   "main": "dist/main/server.js",
   "scripts": {
@@ -25,11 +25,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+link"
+    "url": "git+https://github.com/marcelNogueira/parking-control"
   },
   "author": "jmNogueira",
   "license": "",
-  "homepage": "",
+  "homepage": "https://github.com/marcelNogueira/parking-control",
   "devDependencies": {
     "@prisma/cli": "2.12.1",
     "@types/cors": "^2.8.10",
