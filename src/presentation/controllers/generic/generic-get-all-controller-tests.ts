@@ -38,6 +38,7 @@ export class GenericGetAllControllerTestSuite<BaseT> {
             stringQueryParam: 'string-param',
             numberQueryParam: 2,
             arrayQueryParam: [1, 2, 3],
+            booleanTrueQueryParam: null
           },
         })
         expect(getSpy).toHaveBeenCalledWith(
@@ -47,6 +48,7 @@ export class GenericGetAllControllerTestSuite<BaseT> {
             stringQueryParam: 'string-param',
             numberQueryParam: 2,
             arrayQueryParam: [1, 2, 3],
+            booleanTrueQueryParam: true
           }
         )
       })

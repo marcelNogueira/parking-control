@@ -19,7 +19,7 @@ export interface GenericAddControllerSutModel<BaseT, AddT> {
   controller: GenericAddController<BaseT, AddT>
   addStub: GenericAddInterface<BaseT, AddT>
   validationStub: Validation
-  mockFactory: MockFactoryInterface<BaseT, any, AddT>
+  mockFactory: MockFactoryInterface<BaseT, AddT, any>
 }
 export class GenericAddInterfaceStub<BaseT, AddT> implements GenericAddInterface<BaseT, AddT> {
   constructor(private readonly mockFactory: MockFactoryInterface<BaseT, AddT, any>) {}

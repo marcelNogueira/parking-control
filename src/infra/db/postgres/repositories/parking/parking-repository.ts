@@ -7,6 +7,8 @@ import {
 import { ParkingModel } from '@/domain/models/parking'
 import {
   AddParkingModel,
+  OutParkingModel,
+  PayParkingModel,
 } from '@/domain/usecases/parking'
 import { GenericRepository } from '@/infra/db/postgres/repositories/prisma-generic-repository'
 
@@ -14,7 +16,7 @@ export class ParkingPostgresRepository
   extends GenericRepository<
     ParkingModel,
     AddParkingModel,
-    AddParkingModel
+    OutParkingModel | PayParkingModel
   >
   implements
     AddParkingRepository,

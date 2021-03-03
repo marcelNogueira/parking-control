@@ -1,7 +1,6 @@
 import { MockParkingFactory } from '@/domain/factories/parking'
 import { GetParking } from '@/domain/usecases/parking'
-import { ValidationStub } from '@/presentation/controllers/generic'
-import { InvalidOutError, MissingParamError, ServerError } from '@/presentation/errors'
+import { InvalidOutError, NotFoundError, ServerError } from '@/presentation/errors'
 import { badRequest, forbidden, serverError, success } from '@/presentation/helpers/http/http-helper'
 import { HttpRequest } from '@/presentation/protocols'
 import { OutVerifierMiddleware } from './out-verifier-middleware'
@@ -58,6 +57,13 @@ describe('OutVerifier Controller', () => {
     jest.spyOn(getStub, 'get').mockImplementationOnce(throwError)
     const response = await middleware.handle(makeFakeRequest())
     expect(response).toEqual(serverError(new ServerError(null)))
+  })
+  
+  test('Should return 400 if get returns paid false', async () => {
+    const { middleware, getStub } = makeOutVerifierMiddlewareSutModel()
+    jest.spyOn(getStub, 'get').mockReturnValueOnce(Promise.resolve(null))
+    const response = await middleware.handle(makeFakeRequest())
+    expect(response).toEqual(badRequest(new NotFoundError('ticket')))
   })
   
   test('Should return 403 forbidden if get returns paid false', async () => {

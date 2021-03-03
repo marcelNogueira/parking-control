@@ -6,4 +6,6 @@ coverage
 bash.exe.stackdump
 tmp
 .env
+.husky
 jest-output.json
+src/utils/validators/schema.json
