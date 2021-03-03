@@ -10,7 +10,7 @@
     "build": "npm run pre-build && rimraf dist && tsc -p tsconfig-build.json && npm run copy-schema",
     "pre-build": "ts-json-schema-generator -p \"./src/domain/models/**/*.ts\" --out \"./src/utils/validators/schema.json\"",
     "copy-schema": "cpx ./src/utils/validators/schema.json ./dist/utils/validators",
-    "dev": "npm run build && nodemon ./dist/main/server.js",
+    "dev": "npm run build && npm start",
     "db-up": "docker-compose -f docker-compose-db.yml up -d",
     "db-down": "docker-compose -f docker-compose-db.yml down",
     "docker-up": "npm run build && docker-compose up -d",
